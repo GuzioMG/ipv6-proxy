@@ -3,7 +3,7 @@
 set -euo pipefail
 
 start_processes() {
-    echo "Starting proxy..."
+    echo "$(date): Starting proxy..."
     TARGET=$(dig +short AAAA "$(cat target.txt)" | head -n1)
 
 	if [ -z "$TARGET" ]; then
