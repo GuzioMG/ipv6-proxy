@@ -1,6 +1,6 @@
 #!/bin/bash
 
-set -euo pipefail
+set -o pipefail
 
 start_processes() {
     echo "$(date): Starting proxy..."
@@ -22,8 +22,7 @@ start_processes() {
     run_proxy_udp "$TARGET" 24454 &
     pid4=$!
 
-    echo "Processes started with PIDs: $pid1, $pid2, $pid3 and $pid4, and targeting $TARGET."
-	echo "Use \"killall socat\" or \"killall -9 socat\" (psmisc package needed) to stop and \"cat logs.txt\" to inspect.";
+    echo "Processes started with PIDs: $pid1, $pid2, $pid3 and $pid4, and targeting $TARGET. Use \"killall -9 socat; kill -9 $pid1 $pid2 $pid3 $pid4\" (psmisc package needed) to stop and \"cat logs.txt\" to inspect them.";
 }
 
 run_proxy_tcp() {
