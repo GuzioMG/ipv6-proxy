@@ -29,9 +29,9 @@ start_processes() {
 run_proxy_tcp() {
 	while true
 	do
-		echo "TCP proxy to [$1]:$2 started." >> logs.txt
-		socat TCP4-LISTEN:$2,fork,su=nobody,reuseaddr "TCP6:[$1]:$2" >> logs.txt
-		echo "$(date): TCP proxy to [$1]:$2 died! Restarting in 5s..." >> logs.txt
+		echo "TCP proxy to [$1]:$2 started.";
+		socat TCP4-LISTEN:$2,fork,su=nobody,reuseaddr "TCP6:[$1]:$2"
+		echo "$(date): TCP proxy to [$1]:$2 died! Restarting in 5s...";
 		sleep 5;
 	done
 }
@@ -39,9 +39,9 @@ run_proxy_tcp() {
 run_proxy_udp() {
 	while true
 	do
-		echo "UDP proxy to [$1]:$2 started." >> logs.txt
-		socat UDP4-LISTEN:$2,fork,su=nobody,reuseaddr "UDP6:[$1]:$2" >> logs.txt
-		echo "$(date): UDP proxy to [$1]:$2 died! Restarting in 5s..." >> logs.txt
+		echo "UDP proxy to [$1]:$2 started.";
+		socat UDP4-LISTEN:$2,fork,su=nobody,reuseaddr "UDP6:[$1]:$2"
+		echo "$(date): UDP proxy to [$1]:$2 died! Restarting in 5s...";
 		sleep 5;
 	done
 }
@@ -51,7 +51,7 @@ if [ ! -f "target.txt" ]; then
 	exit 1;
 fi
 
-start_processes >> logs.txt & disown
+start_processes >> logs.txt 2>> logs.txt & disown
 sleep 3;
 cat logs.txt
 exit 0;
